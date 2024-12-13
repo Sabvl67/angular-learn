@@ -1,11 +1,5 @@
-import { Component, Input } from '@angular/core';
-interface Task {
-  id: string;
-  userId: string;
-  title: string;
-  summary: string;
-  dueDate: string;
-}
+import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Task } from './detail.models';
 
 @Component({
   selector: 'app-detail',
@@ -15,5 +9,10 @@ interface Task {
   styleUrl: './detail.component.css'
 })
 export class DetailComponent {
-  @Input({required: true}) task!: Task 
+  @Input({required: true}) task!: Task;
+  @Output() complete = new EventEmitter();
+
+  onCompleteTask(){
+    this.complete.emit(this.task.id)
+  }
 }
